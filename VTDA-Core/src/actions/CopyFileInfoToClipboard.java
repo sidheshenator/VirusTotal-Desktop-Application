@@ -6,6 +6,9 @@
 package actions;
 
 import directorytree.PMFileNode;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import static javax.swing.Action.NAME;
@@ -16,11 +19,16 @@ import static javax.swing.Action.NAME;
  */
 public class CopyFileInfoToClipboard extends AbstractAction {
 
+    PMFileNode pmFileNode;
+
     public CopyFileInfoToClipboard(PMFileNode pmFileNode) {
         putValue(NAME, "Copy to clipboard");
+        this.pmFileNode = pmFileNode;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Clipboard clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clpbrd.setContents(new StringSelection(pmFileNode.pmFile.toString()), null);
     }
 }

@@ -58,7 +58,7 @@ public class ScanFileAction extends AbstractAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (this.pmFileNode.pmFile.isScanned) {
+        if (this.pmFileNode.pmFile.isIsScanned()) {
             JOptionPane.showMessageDialog(null, "The file has been already scanned.");
         }
         if (VirusTotalAPIHelper.apiKey.equals("")) {
@@ -68,7 +68,7 @@ public class ScanFileAction extends AbstractAction {
             return;
         } else {
             // scan file and get the report.
-            CloseableHttpResponse scanFileResponse = VirusTotalAPIHelper.scanFile(this.pmFileNode.pmFile.file);
+            CloseableHttpResponse scanFileResponse = VirusTotalAPIHelper.scanFile(this.pmFileNode.pmFile.getFile());
             try {
                 JSONObject obj = (JSONObject) parser.parse(getStringFromClosableHttpResponse(scanFileResponse));
                 this.pmFileNode.pmFile.isScanned = true;
@@ -80,7 +80,7 @@ public class ScanFileAction extends AbstractAction {
                 Exceptions.printStackTrace(ex);
             }
         }
-        CloseableHttpResponse reportResponse = VirusTotalAPIHelper.getReport(this.pmFileNode.pmFile.sha2);
+        CloseableHttpResponse reportResponse = VirusTotalAPIHelper.getReport(this.pmFileNode.pmFile.getSha2());
         try {
             JSONObject obj = (JSONObject) parser.parse(getStringFromClosableHttpResponse(reportResponse));
             this.pmFileNode.pmFile.scanDate = (String) obj.get("scan_date");
@@ -98,6 +98,7 @@ public class ScanFileAction extends AbstractAction {
                             scan.get("version") == null ? "" : (String) scan.get("version"),
                             scan.get("update") == null ? "" : (String) scan.get("update")));
                     iterator.remove(); // avoids a ConcurrentModificationException
+                    this.pmFileNode.pmFile.numberOfScans++;
                 }
             }
 
