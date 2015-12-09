@@ -37,6 +37,7 @@ public class PMFileNode extends AbstractNode {
         this.removeFileAction = new RemoveFileAction(this);
     }
 
+    @Override
     protected Sheet createSheet() {
         Sheet sheet = Sheet.createDefault();
         Sheet.Set set = Sheet.createPropertiesSet();

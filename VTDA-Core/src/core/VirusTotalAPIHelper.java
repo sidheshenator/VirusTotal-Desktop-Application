@@ -63,7 +63,7 @@ public class VirusTotalAPIHelper {
         }
         return null;
     }
-    
+
     public static CloseableHttpResponse getReport(String sha256) {
         try {
             CloseableHttpClient client = HttpClients.createDefault();

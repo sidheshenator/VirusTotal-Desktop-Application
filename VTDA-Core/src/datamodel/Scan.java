@@ -27,10 +27,9 @@ public class Scan {
 
     @Override
     public String toString() {
-        return "Scan{" + "name=" + name + ", detected=" + detected +
-                ", version=" + version + ", result=" + result +
-                ", update=" + update + "}\n";
+        return "Scan{" + "name=" + name + ", detected=" + detected
+                + ", version=" + version + ", result=" + result
+                + ", update=" + update + "}\n";
     }
-    
-    
+
 }

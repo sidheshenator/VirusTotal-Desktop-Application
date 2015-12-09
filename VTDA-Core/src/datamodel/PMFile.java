@@ -34,7 +34,7 @@ public class PMFile {
     @Override
     public String toString() {
         String listOfScans = "";
-        for(Scan s : this.listOfScans){
+        for (Scan s : this.listOfScans) {
             listOfScans = listOfScans + s.toString();
         }
         return "PMFile\n{" + "file=" + getFile() + ",\n isScanned="

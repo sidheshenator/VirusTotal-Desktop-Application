@@ -22,7 +22,7 @@ public class CopyFileInfoToClipboard extends AbstractAction {
     PMFileNode pmFileNode;
 
     public CopyFileInfoToClipboard(PMFileNode pmFileNode) {
-        putValue(NAME, "Copy to clipboard");
+        putValue(NAME, "Copy"); // NON-NLS
         this.pmFileNode = pmFileNode;
     }
 
