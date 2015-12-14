@@ -24,14 +24,16 @@ import org.openide.util.lookup.Lookups;
 public class PMFileNode extends AbstractNode {
 
     public final PMFile pmFile;
+    public final PMFileChildFactory pmfcf;
     private final ScanFileAction scanFileAction;
     private final CopyFileInfoToClipboard copyFileInfoToClipboard;
     private final RemoveFileAction removeFileAction;
 
-    PMFileNode(PMFile pmFile) {
-        super(Children.LEAF, Lookups.singleton(pmFile));
+    PMFileNode(PMFile pmFile, PMFileChildFactory pmfcf) {
+        super(Children.create(pmfcf, true), Lookups.singleton(pmFile));
         setDisplayName(pmFile.getFile().getName());
         this.pmFile = pmFile;
+        this.pmfcf = pmfcf;
         this.scanFileAction = new ScanFileAction(this);
         this.copyFileInfoToClipboard = new CopyFileInfoToClipboard(this);
         this.removeFileAction = new RemoveFileAction(this);

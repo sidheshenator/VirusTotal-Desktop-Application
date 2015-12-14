@@ -109,6 +109,7 @@ public class ScanFileAction extends AbstractAction {
                     Exceptions.printStackTrace(ex);
                 }
                 MainWindowTopComponent.getInstance().writeOutput(pmFileNode.pmFile.toString());
+                pmFileNode.pmfcf.refresh(pmFileNode.pmFile);
                 return null;
             }
         }.run();

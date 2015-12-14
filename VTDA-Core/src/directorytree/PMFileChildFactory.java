@@ -6,7 +6,7 @@
 package directorytree;
 
 import datamodel.PMFile;
-import java.util.ArrayList;
+import datamodel.Scan;
 import java.util.List;
 import org.openide.nodes.ChildFactory;
 import org.openide.nodes.Node;
@@ -15,23 +15,27 @@ import org.openide.nodes.Node;
  *
  * @author SMhatre
  */
-public class PMFilesRootChildFactory extends ChildFactory<PMFile> {
+public class PMFileChildFactory extends ChildFactory<Scan> {
 
-    List<PMFile> listOfPMFiles = new ArrayList<>();
+    List<Scan> listOfScans;
+
+    PMFileChildFactory(List<Scan> listOfScans) {
+        this.listOfScans = listOfScans;
+    }
 
     @Override
-    protected boolean createKeys(List<PMFile> toPopulate) {
-        toPopulate.addAll(listOfPMFiles);
+    protected boolean createKeys(List<Scan> toPopulate) {
+        toPopulate.addAll(listOfScans);
         return true;
     }
 
     @Override
-    protected Node createNodeForKey(PMFile key) {
-        return new PMFileNode(key, new PMFileChildFactory(key.listOfScans));
+    protected Node createNodeForKey(Scan key) {
+        return new ScanNode(key);
     }
 
     public void refresh(PMFile pmFile) {
-        listOfPMFiles.add(pmFile);
+        listOfScans.addAll(pmFile.listOfScans);
         refresh(true);
     }
 }
